@@ -5,8 +5,8 @@ import { pinecone } from '@/utils/pinecone-client';
 import { CustomPDFLoader } from '@/utils/customPDFLoader';
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
-import "@tensorflow/tfjs-backend-cpu";
-import { TensorFlowEmbeddings } from 'langchain/embeddings/tensorflow';
+// import "@tensorflow/tfjs-backend-cpu";
+// import { TensorFlowEmbeddings } from 'langchain/embeddings/tensorflow';
 
 /* Name of directory to retrieve your files from */
 const filePath = 'docs';
@@ -32,8 +32,8 @@ export const run = async () => {
 
     console.log('creating vector store...');
     /*create and store the embeddings in the vectorStore*/
-    // const embeddings = new OpenAIEmbeddings();
-    const embeddings = new TensorFlowEmbeddings();
+    const embeddings = new OpenAIEmbeddings({ openAIApiKey: process.env.OPENAI_API_KEY });
+    // const embeddings = new TensorFlowEmbeddings();,
 
     const index = pinecone.Index(PINECONE_INDEX_NAME); //change to your own index name
 
